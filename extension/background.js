@@ -5,7 +5,7 @@ function sendCurrentUrl() {
         let url = tabs[0].url;
 
         // Send the URL to your server endpoint
-        fetch(`http://192.168.0.3:5000/receive_url?url=${encodeURIComponent(url)}`)
+        fetch(`http://patf.com/pigeon/receive_url?url=${encodeURIComponent(url)}`)
             .then(response => response.json())
             .then(data => console.log('URL sent successfully', data))
             .catch(error => console.error('Error sending URL', error));
