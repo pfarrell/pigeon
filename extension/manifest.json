@@ -1,0 +1,29 @@
+{
+    "manifest_version": 2,
+    "name": "URL Sender",
+    "version": "1.0",
+    "description": "Sends the current URL to a server",
+    "icons": {
+        "16": "icon-16.png",
+        "48": "icon-48.png",
+        "128": "icon-128.png"
+    },
+    "browser_action": {
+        "default_icon": {
+            "16": "icon-16.png",
+            "48": "icon-48.png",
+            "128": "icon-128.png"
+        },
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "permissions": [
+        "storage",
+        "activeTab",
+        "*://*/*"  
+    ]
+}
+
