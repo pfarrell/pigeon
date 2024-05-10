@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
-  web:
+  api:
     build:
-      context: ./services/web
+      context: ./services/api
       dockerfile: Dockerfile.prod
     command: gunicorn --bind 0.0.0.0:5000 manage:app
     ports:

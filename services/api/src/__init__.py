@@ -9,7 +9,7 @@ app.config.from_object("src.config.Config")
 db = SQLAlchemy(app)
 
 
-#class User(db.Model):
+# class User(db.Model):
 #    __tablename__ = "users"
 #
 #    id = db.Column(db.Integer, primary_key=True)
@@ -18,6 +18,7 @@ db = SQLAlchemy(app)
 #
 #    def __init__(self, email):
 #        self.email = email
+
 
 class CapturedUrl(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -29,20 +30,19 @@ class CapturedUrl(db.Model):
         return f"<CapturedURL {self.url}>"
 
 
-@app.route("/receive_url", methods=['GET'])
+@app.route("/receive_url", methods=["GET"])
 def receive_url():
-    url = request.args.get('url')
+    url = request.args.get("url")
     if url:
         try:
             response = requests.get(url)
-            soup = BeautifulSoup(response.content, 'html.parser')
-            title = soup.title.string if soup.title else 'No title available'
+            soup = BeautifulSoup(response.content, "html.parser")
+            title = soup.title.string if soup.title else "No title available"
 
             new_url = CapturedUrl(url=url, title=title)
             db.session.add(new_url)
             db.session.commit()
-            return jsonify({'status': 'success', 'url': url, 'title': title})
+            return jsonify({"status": "success", "url": url, "title": title})
         except requests.RequestException as e:
-                return jsonify({'status': 'error', 'message': str(e)}), 500
-    return jsonify({'status': 'error', 'message': 'URL parameter is missing'}), 400
-
+            return jsonify({"status": "error", "message": str(e)}), 500
+    return jsonify({"status": "error", "message": "URL parameter is missing"}), 400
